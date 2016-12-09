@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="uft-8"/>
+	<title></title>
+	<style type="text/css">
+	*{margin: 0;padding: 0;}
+	#as{
+		float: left;
+		border: 1px solid #3c3c3c;
+		width: 350px;
+		height: 350px;
+		position: relative;
+		cursor: move;
+	}
+	#bs{
+		float: left;
+		overflow: scroll;
+		margin-left: 40px;
+		width: 350px;
+		height: 350px;
+		display: none;
+	}
+	#cs{
+		width: 10000px;
+	}
+	#cs img{
+		width: 1400px;
+		height: 1400px;
+	}
+	#a1{
+		width: 125px;
+		height:125px;
+		background: red;
+		opacity: 0.3;
+		position: absolute;
+		top: 0;
+		left: 0;
+		display: none;
+	}
+	#le,#ri{
+		float: left;
+		margin-right: 15px;
+		margin-top: 15px;
+		cursor: pointer;
+	}
+	.clear{
+		clear: both;
+		height: 0;
+		overflow: hidden;
+	}
+	</style>
+</head>
+<body>
+<div id="as">
+	<img id="c1" src="tu.jpg">
+	<div id="a1"></div>
+</div>
+<div id="bs">
+	<div id="cs">
+		<img id="c2" src="tu.jpg">
+	</div>
+</div>
+<div class="clear"></div>
+<div id="le">
+	<img src="tu1.jpg">
+</div>
+<div id="ri">
+	<img src="tu2.jpg">
+</div>
+</body>
+<script type="text/javascript">
+	var a1=document.getElementById("a1");
+	var bs=document.getElementById("bs");
+	var as=document.getElementById("as");
+	var c1=document.getElementById("c1");
+	var c2=document.getElementById("c2");
+	var le=document.getElementById('le');
+	var ri=document.getElementById('ri');
+	as.onmouseover=function(){
+		a1.style.display="block";
+		bs.style.display="block";
+		as.onmousemove=function(ev){
+			var even=ev||window.event;
+			var kaisx=even.clientX;
+			var kaisy=even.clientY;
+			var x=(kaisx-as.offsetLeft)-a1.offsetWidth/2;
+			var y=(kaisy-as.offsetTop)-a1.offsetHeight/2;
+			var max=as.clientWidth-a1.offsetWidth;
+			var may=as.clientHeight-a1.offsetHeight;
+			if(x>=max){
+				x=max;
+			}
+			if(x<0){
+				x=0;
+			}
+			if(y>=may){
+				y=may;
+			}
+			if(y<0){
+				y=0;
+			}
+			a1.style.left=x+'px';
+			a1.style.top=y+'px';
+			var m=c2.offsetWidth/c1.offsetWidth;
+			bs.scrollLeft=a1.offsetLeft*m;
+			bs.scrollTop=a1.offsetTop*m;
+		}
+	}
+	as.onmouseout=function(){
+		a1.style.display="none";
+		bs.style.display="none";
+	}
+	le.onclick=function(){
+		c1.src='tu.jpg';
+		c2.src='tu.jpg';
+
+	}
+	ri.onclick=function(){
+		c1.src='tu1.jpg';
+		c2.src='tu1.jpg';
+
+	}
+</script>
+</html>
